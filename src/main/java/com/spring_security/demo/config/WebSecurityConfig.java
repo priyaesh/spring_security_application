@@ -13,6 +13,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .csrf(csrf-> csrf.disable())
                 .authorizeHttpRequests(
                         request -> request.anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())

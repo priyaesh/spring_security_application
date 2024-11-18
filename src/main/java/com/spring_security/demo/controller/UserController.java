@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 public class UserController {
 
@@ -20,5 +22,12 @@ public class UserController {
     public User register(@RequestBody User user){
     return userRepository.save(user);
 
+    }
+    @PostMapping("/login")
+    public String login(@RequestBody User user){
+        var U =userRepository.findByUserName(user.getUserName());
+        if(!Objects.isNull(U))
+            return "success";
+        return "failure";
     }
 }
